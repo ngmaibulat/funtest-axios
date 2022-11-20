@@ -1,0 +1,40 @@
+{
+    "name": "@aibulat/funtest",
+    "version": "0.0.13",
+    "description": "Using supertest to make tests for some publicly available REST APIs",
+    "main": "dist/index.js",
+    "type": "module",
+    "bin": "./dist/bin/run.sh",
+    "scripts": {
+        "test": "./dist/bin/run.sh",
+        "commit": "git add . ; git commit -a -m minor; git push"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ngmaibulat/funtest.git"
+    },
+    "keywords": [
+        "REST API",
+        "API",
+        "Test",
+        "Jest",
+        "Supertest"
+    ],
+    "author": "REST API Supertest",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ngmaibulat/funtest/issues"
+    },
+    "homepage": "https://github.com/ngmaibulat/funtest#readme",
+    "dependencies": {
+        "supertest": "^6.3.1"
+    },
+    "devDependencies": {
+        "@jest/globals": "^29.3.1",
+        "@types/jest": "^29.2.3",
+        "@types/supertest": "^2.0.12",
+        "esbuild": "^0.15.14",
+        "jest": "^29.3.1",
+        "ts-jest": "^29.0.3"
+    }
+}
