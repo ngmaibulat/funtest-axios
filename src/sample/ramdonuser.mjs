@@ -66,6 +66,4 @@ const reply = {
     },
 };
 
-const samples = { reply };
-
-export default samples;
+export default reply;

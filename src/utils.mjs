@@ -1,26 +1,28 @@
-import { jest, describe, expect, test } from "@jest/globals";
-import request from "supertest";
+import { expect } from "@jest/globals";
 
-export function stdChecks(response: request.Response) {
-    expect(response.type).toBe("application/json");
-    expect(response.charset).toBe("utf-8");
-    expect(response.status).toBe(200);
-    expect(response.ok).toBe(true);
-    expect(response.redirect).toBe(false);
-}
+export class Utils {
+    static stdChecks(response) {
+        expect(response.status).toBe(200);
+        expect(response.statusText).toBe("OK");
+        expect(response.headers["content-type"]).toMatch(/application\/json/);
+        expect(response.headers["content-type"]).toMatch(/charset=utf-8/);
 
-export function checkArray(something: any) {
-    expect(Array.isArray(something)).toBe(true);
-}
+        // expect(response.redirect).toBe(false);
+    }
 
-export function checkProps(response: any, props: string[]) {
-    if (Array.isArray(response)) {
-        for (const prop of props) {
-            expect(response[0]).toHaveProperty(prop);
-        }
-    } else {
-        for (const prop of props) {
-            expect(response).toHaveProperty(prop);
+    static checkArray(something) {
+        expect(Array.isArray(something)).toBe(true);
+    }
+
+    static checkProps(response, props) {
+        if (Array.isArray(response)) {
+            for (const prop of props) {
+                expect(response[0]).toHaveProperty(prop);
+            }
+        } else {
+            for (const prop of props) {
+                expect(response).toHaveProperty(prop);
+            }
         }
     }
 }

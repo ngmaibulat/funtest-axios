@@ -5,7 +5,7 @@
     "type": "commonjs",
     "bin": "./bin/run.sh",
     "scripts": {
-        "test": "jest",
+        "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --verbose",
         "commit": "git add . ; git commit -a -m minor; git push"
     },
     "repository": {

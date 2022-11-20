@@ -1,22 +1,28 @@
 const axios = require("axios");
 
-import { stdChecks, checkArray, checkProps } from "./utils.mjs";
-import samples from "./sample/ramdonuser.mjs";
-
 const url = "https://randomuser.me";
-const req = request(url);
+let utils, samples;
+
+beforeAll(async () => {
+    const utilsmod = await import("./utils.mjs");
+    samples = await import("./sample/ramdonuser.mjs");
+    utils = utilsmod.Utils;
+});
 
 test(`connect ${url}`, async () => {
     const path = "/";
-    const response = await req.get(path);
+    const response = await axios.get(url + path);
     expect(response.status).toBe(200);
 });
 
 test("get /api", async () => {
     const path = "/api";
-    const response = await req.get(path);
+    const response = await axios.get(url + path);
 
-    stdChecks(response);
-    checkArray(response.body.results);
-    checkProps(response.body.results[0], Object.keys(samples.reply.results[0]));
+    utils.stdChecks(response);
+    utils.checkArray(response.data.results);
+    utils.checkProps(
+        response.data.results[0],
+        Object.keys(samples.default.results[0])
+    );
 });
