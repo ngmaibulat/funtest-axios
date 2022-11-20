@@ -1,4 +1,6 @@
-import { stdChecks, checkArray, checkProps } from "./utils.js";
+const axios = require("axios");
+
+import { stdChecks, checkArray, checkProps } from "./utils.mjs";
 import samples from "./sample/ramdonuser.mjs";
 
 const url = "https://randomuser.me";
