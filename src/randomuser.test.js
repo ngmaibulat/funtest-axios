@@ -1,9 +1,7 @@
-// import { jest, describe, expect, test } from "@jest/globals";
-import request from "supertest";
 import { stdChecks, checkArray, checkProps } from "./utils.js";
-import samples from "./sample/ipinfo.js";
+import samples from "./sample/ramdonuser.mjs";
 
-const url = "https://ipinfo.io";
+const url = "https://randomuser.me";
 const req = request(url);
 
 test(`connect ${url}`, async () => {
@@ -12,10 +10,11 @@ test(`connect ${url}`, async () => {
     expect(response.status).toBe(200);
 });
 
-test("get /8.8.8.8", async () => {
-    const path = "/8.8.8.8";
+test("get /api", async () => {
+    const path = "/api";
     const response = await req.get(path);
 
     stdChecks(response);
-    checkProps(response.body, Object.keys(samples.reply));
+    checkArray(response.body.results);
+    checkProps(response.body.results[0], Object.keys(samples.reply.results[0]));
 });

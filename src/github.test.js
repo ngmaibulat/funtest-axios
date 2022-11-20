@@ -1,7 +1,5 @@
-// import { jest, describe, expect, test } from "@jest/globals";
-import request from "supertest";
 import { stdChecks, checkArray, checkProps } from "./utils.js";
-import samples from "./sample/github.js";
+import samples from "./sample/github.mjs";
 
 const url = "https://api.github.com";
 const req = request(url);

@@ -1,7 +1,5 @@
-// import { jest, describe, expect, test } from "@jest/globals";
-import request from "supertest";
 import { stdChecks, checkArray, checkProps } from "./utils.js";
-import samples from "./sample/reqres.js";
+import samples from "./sample/reqres.mjs";
 
 const url = "https://reqres.in";
 const req = request(url);
