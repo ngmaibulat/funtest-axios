@@ -12,6 +12,4 @@ const reply = {
     readme: "https://ipinfo.io/missingauth",
 };
 
-const samples = { reply };
-
-export default samples;
+export { reply };

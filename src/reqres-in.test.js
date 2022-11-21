@@ -1,12 +1,11 @@
 const axios = require("axios");
+const Utils = require("./utils");
 
 const url = "https://reqres.in";
-let utils, samples;
+let samples;
 
 beforeAll(async () => {
-    const utilsmod = await import("./utils.mjs");
     samples = await import("./sample/reqres.mjs");
-    utils = utilsmod.Utils;
 });
 
 test(`connect ${url}`, async () => {
@@ -19,25 +18,25 @@ test("get /api/users", async () => {
     const path = "/api/users";
     const response = await axios.get(url + path);
 
-    stdChecks(response);
-    checkArray(response.data.data);
-    checkProps(response.data.data, Object.keys(samples.user));
+    Utils.stdChecks(response);
+    Utils.checkArray(response.data.data);
+    Utils.checkProps(response.data.data, Object.keys(samples.user));
 });
 
 test("get /api/users/1", async () => {
     const path = "/api/users/1";
     const response = await axios.get(url + path);
 
-    stdChecks(response);
+    Utils.stdChecks(response);
     // checkArray(response.body.data);
-    checkProps(response.data.data, Object.keys(samples.user));
+    Utils.checkProps(response.data.data, Object.keys(samples.user));
 });
 
 test("post /api/register", async () => {
     const path = "/api/register";
-    const response = await axios.post(url + path).send(samples.regdata);
+    const response = await axios.post(url + path, samples.regdata);
 
-    stdChecks(response);
+    Utils.stdChecks(response);
     // checkArray(response.body.data);
-    checkProps(response.body, Object.keys(samples.token));
+    Utils.checkProps(response.data, Object.keys(samples.token));
 });

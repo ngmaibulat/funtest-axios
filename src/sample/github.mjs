@@ -34,6 +34,4 @@ const user = {
     updated_at: "2022-10-24T11:21:44Z",
 };
 
-const samples = { user };
-
-export default samples;
+export { user };

@@ -1,4 +1,4 @@
-const user: object = {
+const user = {
     id: 1,
     name: "Leanne Graham",
     username: "Bret",
@@ -39,6 +39,4 @@ const comment = {
     body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
 };
 
-const samples = { user, post, comment };
-
-export default samples;
+export { user, post, comment };

@@ -16,6 +16,4 @@ const token = {
     token: "QpwL5tke4Pnpja7X4",
 };
 
-const samples = { user, regdata, token };
-
-export default samples;
+export { user, regdata, token };

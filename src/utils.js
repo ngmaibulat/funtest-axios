@@ -1,6 +1,4 @@
-import { expect } from "@jest/globals";
-
-export class Utils {
+class Utils {
     static stdChecks(response) {
         expect(response.status).toBe(200);
         expect(response.statusText).toBe("OK");
@@ -26,3 +24,5 @@ export class Utils {
         }
     }
 }
+
+module.exports = Utils;
