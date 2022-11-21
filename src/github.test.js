@@ -2,7 +2,7 @@ const axios = require("axios");
 const Utils = require("./utils");
 
 /*
-if Axios exception is not handled: Jest might end up with its own Exception
+if Axios exceptions are not handled: Jest might end up with its own Exception
 while trying to print out the Exception info to console
 That happens while doing JSON.stringify for object
 having circular structure
@@ -23,21 +23,33 @@ TypeError: Converting circular structure to JSON
     at reportSuccess (/Users/ngmaibulat/projects/packages/_apitest/funtest-axios/node_modules/jest-worker/build/workers/processChild.js:63:11)
 
 
-    Hense, using the following code:
+    Hense, you have 2 options:
+        1. Handle exceptions
+        2. Use ValidateStatus function
+
+1. Handling Exceptions:
 
     let response;
     try {
         response = await http.get("/");
     } catch (e) {
+        response = e.response;
     } finally {
         expect(response.status).toBe(200);
     }
 
-    In general, axios seems to be less convienent to use for API testing
-    compared to SuperTest, Fetch. As it throws Exceptions instead of just
-    giving result codes and let the caller decide if those should really thrown.
-    For usual application code, Axios approach (mostly) convinient.
-    But not for testing or low-level code.
+2. Validate Status:
+
+    const http = axios.create({
+        baseURL: "https://api.github.com",
+        timeout: 1000,
+        headers: { "User-Agent": "curl/7.79.1" },
+
+        validateStatus: function (status) {
+            return status < 600; // Resolve only if the status code is less than 500
+        },
+    });
+
 */
 
 const samplesPath = "./sample/github.mjs";
@@ -47,6 +59,10 @@ const http = axios.create({
     baseURL: "https://api.github.com",
     timeout: 1000,
     headers: { "User-Agent": "curl/7.79.1" },
+
+    validateStatus: function (status) {
+        return status < 600; // Resolve only if the status code is less than 500
+    },
 });
 
 beforeAll(async () => {
@@ -55,11 +71,21 @@ beforeAll(async () => {
 
 test(`connect https://api.github.com`, async () => {
     let response = {};
+
     try {
         response = await http.get("/");
     } catch (e) {
+        response = e.response;
     } finally {
         expect(response.status).toBe(200);
+    }
+});
+
+test(`connect https://api.github.com: no Exceptions`, async () => {
+    const response = await http.get("/");
+
+    if (response.status != 200) {
+        throw new Error("Fail test via throwing Error");
     }
 });
 
@@ -68,6 +94,7 @@ test("get /users/octocat", async () => {
     try {
         response = await Utils.ghGetUser("octocat");
     } catch (e) {
+        response = e.response;
     } finally {
         expect(response.status).toBe(200);
         Utils.stdChecks(response);
@@ -104,12 +131,27 @@ test("throw Error in async function: async/await", async () => {
     }
 });
 
+test("throw Error in async function: async/await + Promise.reject()", async () => {
+    async function badCode() {
+        // throw new Error("bad code!");
+        const err = new Error("bad code!");
+        return Promise.reject(err);
+    }
+
+    try {
+        await badCode();
+    } catch (e) {
+        expect(e.message).toMatch(/bad/);
+    }
+});
+
 test("throw Error in async function: expect rejects", async () => {
     async function badCode() {
         throw new Error("bad code!");
         // return Promise.reject("bad code!");
     }
 
-    expect(badCode()).rejects.toThrowError(); //can call as it returns Promise
+    expect(badCode()).rejects.toThrowError(); //can call badCode() as it returns Promise
     expect(badCode).rejects.toThrowError();
+    expect(badCode).rejects;
 });
