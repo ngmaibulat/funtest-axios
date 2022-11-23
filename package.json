@@ -3,9 +3,10 @@
     "version": "0.0.1",
     "description": "Using JS/Axios/Jest/CommonJS to make tests for some publicly available REST APIs",
     "type": "commonjs",
-    "bin": "./bin/run.sh",
+    "bin": "./dist/bin/run.sh",
     "scripts": {
-        "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --verbose",
+        "test:direct": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --verbose",
+        "test": "bash ./dist/bin/run.sh",
         "commit": "git add . ; git commit -a -m minor; git push"
     },
     "repository": {
@@ -26,6 +27,8 @@
     },
     "homepage": "https://github.com/ngmaibulat/funtest-axios#readme",
     "dependencies": {
+        "@aibulat/isfile": "^0.0.3",
+        "@aibulat/json": "^0.0.8",
         "@types/axios": "^0.14.0",
         "axios": "^1.1.3"
     },

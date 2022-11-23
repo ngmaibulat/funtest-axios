@@ -58,7 +58,10 @@ let samples;
 const http = axios.create({
     baseURL: "https://api.github.com",
     timeout: 1000,
-    headers: { "User-Agent": "curl/7.79.1" },
+    headers: {
+        "User-Agent": "curl/7.79.1",
+        Accept: "application/vnd.github+json",
+    },
 
     validateStatus: function (status) {
         return status < 600; // Resolve only if the status code is less than 500
