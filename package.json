@@ -3,10 +3,10 @@
   "version": "0.0.4",
   "description": "Using JS/Axios/Jest/CommonJS to make tests for some publicly available REST APIs",
   "type": "commonjs",
-  "bin": "./dist/bin/run.mjs",
+  "bin": "./bin/run.mjs",
   "scripts": {
     "test:direct": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --verbose",
-    "test": "./dist/bin/run.mjs",
+    "test": "./bin/run.mjs",
     "commit": "git add . ; git commit -a -m minor; git push"
   },
   "repository": {

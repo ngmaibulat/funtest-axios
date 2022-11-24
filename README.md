@@ -14,6 +14,7 @@
 - Previous LTS version Node-16 now under `Maintenance` mode
 - Support for Node-16 would end in less than a year: 2023-09-11
 - See: https://github.com/nodejs/release#release-schedule
+- Release info in json: https://github.com/nodejs/Release/blob/main/schedule.json
 
 ### Why
 
