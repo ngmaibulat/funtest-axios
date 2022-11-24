@@ -9,6 +9,11 @@ const options = {
     },
 };
 
+const defaultConfig = {
+    timeout: 1500,
+    useragent: "curl/7.79.1",
+};
+
 async function run() {
     const nodever = parseInt(process.versions.node);
 
@@ -41,17 +46,21 @@ async function run() {
         process.exit(1);
     }
 
-    // console.log(values.config);
-    // console.log(values.mock);
-
     //read json from file
     const data = await jsonUtil.readJson(values.config);
-    console.log(data);
+    console.log(data.timeout);
+    console.log(data.useragent);
+
+    //put configs for env var
+    process.env.FUNTEST_TIMEOUT = data.timeout || defaultConfig.timeout;
+    process.env.FUNTEST_USERAGENT = data.useragent || defaultConfig.useragent;
+
+    //put node_options env var
+    process.env.NODE_OPTIONS = "--experimental-vm-modules --no-warnings";
 
     //check internet connection
     //check dns
-    //put configs for env var
-    //put node_options env var
+
     //run jest
 }
 
