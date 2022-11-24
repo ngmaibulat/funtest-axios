@@ -12,6 +12,7 @@ const http = axios.create({
     headers: {
         "User-Agent": process.env.FUNTEST_USERAGENT || "curl/7.79.1",
         Accept: "application/json",
+        "Accept-Encoding": "application/json",
     },
 
     validateStatus: function (status) {

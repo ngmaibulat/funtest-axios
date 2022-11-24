@@ -65,6 +65,7 @@ const http = axios.create({
     headers: {
         "User-Agent": process.env.FUNTEST_USERAGENT || "curl/7.79.1",
         Accept: "application/vnd.github+json",
+        "Accept-Encoding": "application/vnd.github+json",
     },
 
     validateStatus: function (status) {

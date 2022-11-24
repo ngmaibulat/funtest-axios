@@ -78,7 +78,7 @@ async function runJest() {
     const npxMode = selfPath.match(/\.bin/);
     if (npxMode) {
         console.log("npx mode");
-        const prjPath = path.resolve(selfPath, "../..");
+        const prjPath = path.resolve(selfPath, "../../..");
         chdir(prjPath);
         await fs.cp("node_modules/@aibulat/funtest-axios/", ".", {
             recursive: true,
