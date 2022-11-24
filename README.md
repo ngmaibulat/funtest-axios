@@ -6,6 +6,15 @@
 - Rather published referense code, which can be easily run
 - I might consider extracting some of techniques used here and create a tiny library later.
 
+### Warning on Node version
+
+- Use node version 18 or later!
+- Node-18 is the current LTS version, suitable for most users
+- Node-18 will be supported till 2025-04-30
+- Previous LTS version Node-16 now under `Maintenance` mode
+- Support for Node-16 would end in less than a year: 2023-09-11
+- See: https://github.com/nodejs/release#release-schedule
+
 ### Why
 
 - Test that referense public API are actually usable from your location
