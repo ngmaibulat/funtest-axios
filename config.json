@@ -1,4 +1,4 @@
 {
-    "timeout": 1500,
-    "useragent": "curl/7.79.1"
+  "timeout": 1500,
+  "useragent": "curl/7.79.1"
 }
