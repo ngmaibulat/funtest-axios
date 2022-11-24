@@ -6,7 +6,7 @@
     "bin": "./dist/bin/run.mjs",
     "scripts": {
         "test:direct": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --verbose",
-        "test": "bash ./dist/bin/run.sh",
+        "test": "./dist/bin/run.mjs",
         "commit": "git add . ; git commit -a -m minor; git push"
     },
     "repository": {
