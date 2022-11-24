@@ -6,9 +6,11 @@ let samples;
 
 const http = axios.create({
     baseURL: url,
-    timeout: 1000,
+    timeout: +process.env.FUNTEST_TIMEOUT || 2000,
+    timeoutErrorMessage: "err::timeout",
+
     headers: {
-        "User-Agent": "funtest/0.0.1",
+        "User-Agent": process.env.FUNTEST_USERAGENT || "curl/7.79.1",
         Accept: "application/json",
     },
 

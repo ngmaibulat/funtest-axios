@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "Using JS/Axios/Jest/CommonJS to make tests for some publicly available REST APIs",
     "type": "commonjs",
-    "bin": "./dist/bin/run.sh",
+    "bin": "./dist/bin/run.mjs",
     "scripts": {
         "test:direct": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest --verbose",
         "test": "bash ./dist/bin/run.sh",
@@ -29,6 +29,7 @@
     "dependencies": {
         "@aibulat/isfile": "^0.0.3",
         "@aibulat/json": "^0.0.8",
+        "@aibulat/run": "^0.0.6",
         "@types/axios": "^0.14.0",
         "axios": "^1.1.3"
     },

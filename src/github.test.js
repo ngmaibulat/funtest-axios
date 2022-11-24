@@ -55,11 +55,15 @@ TypeError: Converting circular structure to JSON
 const samplesPath = "./sample/github.mjs";
 let samples;
 
+const url = "https://api.github.com";
+
 const http = axios.create({
-    baseURL: "https://api.github.com",
-    timeout: 1000,
+    baseURL: url,
+    timeout: +process.env.FUNTEST_TIMEOUT || 2000,
+    timeoutErrorMessage: "err::timeout",
+
     headers: {
-        "User-Agent": "curl/7.79.1",
+        "User-Agent": process.env.FUNTEST_USERAGENT || "curl/7.79.1",
         Accept: "application/vnd.github+json",
     },
 

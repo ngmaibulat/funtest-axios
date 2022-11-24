@@ -7,12 +7,11 @@ let samples;
 
 const http = axios.create({
     baseURL: url,
-    timeout: 3000,
-    // timeout: 3,
+    timeout: +process.env.FUNTEST_TIMEOUT || 2000,
     timeoutErrorMessage: "err::timeout",
 
     headers: {
-        "User-Agent": "funtest/0.0.1",
+        "User-Agent": process.env.FUNTEST_USERAGENT || "curl/7.79.1",
         Accept: "application/json",
     },
 
@@ -72,34 +71,36 @@ test(`connect ${url}`, async () => {
 });
 
 test("get /v0/topstories.json", async () => {
+    const path = "/v0/topstories.json";
+    let response = null;
+
     try {
-        const path = "/v0/topstories.json";
-        // const response = await http.get(path);
-
-        // expect(response.status).toBe(200);
-        // expect(response.statusText).toBe("OK");
-        // expect(response.headers["content-type"]).toMatch(/application\/json/);
-        // expect(response.headers["content-type"]).toMatch(/charset=utf-8/);
-
-        // Utils.checkArray(response.data);
+        response = await http.get(path);
     } catch (e) {
-        const data = e.request.data;
-        console.log(data);
+        throw new Error(e.message);
+        // const data = e.request.data;
+        // console.log(data);
     }
+
+    expect([200, 301]).toContain(response.status);
+    expect(response.headers["content-type"]).toMatch(/application\/json/);
+    expect(response.headers["content-type"]).toMatch(/charset=utf-8/);
+
+    Utils.checkArray(response.data);
 });
 
-// test("get /v0/newstories.json", async () => {
-//     const path = "/v0/newstories.json";
-//     const response = await http.get(path);
+test("get /v0/newstories.json", async () => {
+    const path = "/v0/newstories.json";
+    const response = await http.get(path);
 
-//     Utils.stdChecks(response);
-//     Utils.checkArray(response.data);
-// });
+    Utils.stdChecks(response);
+    Utils.checkArray(response.data);
+});
 
-// test("get /v0/beststories.json", async () => {
-//     const path = "/v0/beststories.json";
-//     const response = await http.get(path);
+test("get /v0/beststories.json", async () => {
+    const path = "/v0/beststories.json";
+    const response = await http.get(path);
 
-//     Utils.stdChecks(response);
-//     Utils.checkArray(response.data);
-// });
+    Utils.stdChecks(response);
+    Utils.checkArray(response.data);
+});
