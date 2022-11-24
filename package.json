@@ -1,6 +1,6 @@
 {
   "name": "@aibulat/funtest-axios",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Using JS/Axios/Jest/CommonJS to make tests for some publicly available REST APIs",
   "type": "commonjs",
   "bin": "./bin/run.mjs",
